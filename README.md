@@ -1,5 +1,10 @@
 # Datenbankprojekt(DBPRO) WS 19-20 at DIMA Faculty of TU Berlin
 
+Contributors:
+Ardeshir Soltani Nejad
+Yordan Grigorov 
+Lyubomira Gerova 
+
 This tutorial requires: 
 - Java 8.0, Apache Maven 3.6.0, one IDE (Eclipse, IntelliJ) 
 - Download the tutorial
