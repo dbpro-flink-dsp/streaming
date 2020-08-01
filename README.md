@@ -1,4 +1,4 @@
-# Datenbankprojekt(DBPRO) WS 19-20 at DIMA Department of Faculty 4 of TU Berlin
+# Datenbankprojekt(DBPRO) WS 19-20 at DIMA Department of Faculty 4 at TU Berlin
 
 Contributors:
 Ardeshir Soltani Nejad,
