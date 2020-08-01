@@ -1,4 +1,4 @@
-# IMPRO-DBPRO-WS19-20-Tutorial
+# Datenbankprojekt(DBPRO) WS 19-20 at DIMA Faculty of TU Berlin
 
 This tutorial requires: 
 - Java 8.0, Apache Maven 3.6.0, one IDE (Eclipse, IntelliJ) 
