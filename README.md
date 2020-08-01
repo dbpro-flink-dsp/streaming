@@ -5,6 +5,10 @@ Ardeshir Soltani Nejad,
 Yordan Grigorov, 
 Lyubomira Gerova 
 
+Supervisors: 
+Dr. Marcela Charfuelan: https://www.dima.tu-berlin.de/menue/team/marcela_charfuelan/parameter/de/
+Dr. Holmer Hemsen: https://www.dfki.de/en/web/about-us/employee/person/hohe01/
+
 This tutorial requires: 
 - Java 8.0, Apache Maven 3.6.0, one IDE (Eclipse, IntelliJ) 
 - Download the tutorial
