@@ -25,7 +25,9 @@ public class KeyedDataPoint<T> extends DataPoint<T> {
   public String toString() {
     Date date = new Date(getTimeStampMs());
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-    return  sdf.format(date) + "," + getValue();
+    //return  sdf.format(date) + "," + getValue();
+
+    return key + "," + getTimeStampMs() + "," + getValue();
     // short in tm
     // return getTimeStampMs() + "," + getKey() + "," + getValue();
   }

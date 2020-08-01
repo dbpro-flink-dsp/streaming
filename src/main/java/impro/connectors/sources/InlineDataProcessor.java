@@ -21,12 +21,12 @@ package impro.connectors.sources;
 
 /**
  * @author Marc Schr&ouml;der
- * 
+ *
  */
 public interface InlineDataProcessor {
 	/**
 	 * Perform some in-place processing on the given data.
-	 * 
+	 *
 	 * @param data
 	 *            data
 	 * @param off

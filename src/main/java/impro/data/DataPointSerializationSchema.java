@@ -1,5 +1,5 @@
 package impro.data;
-
+//Not used for StreamingAudioProcessingJob
 
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.common.serialization.SerializationSchema;

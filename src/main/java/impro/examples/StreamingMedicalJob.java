@@ -15,8 +15,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import impro.data.KeyedDataPoint;
-import impro.connectors.sinks.InfluxDBSink;
-import impro.functions.AverageWindowFunction;
 import impro.functions.MovingAverageFunction;
 
 /**
@@ -34,8 +32,9 @@ public class StreamingMedicalJob {
         @SuppressWarnings({"rawtypes", "serial"})
 
         // test with file in: src/main/resources/a40834n.csv
-        DataStream<KeyedDataPoint<Double>> mimicData;
-        mimicData = env.readTextFile(params.get("input")).map(new ParseData());
+                DataStream<KeyedDataPoint<Double>> mimicData;
+        //mimicData = env.readTextFile(params.get("input")).map(new ParseData());
+        mimicData = env.readTextFile("./src/main/resources/a40834n.csv").map(new ParseData());
 
         //mimicData.addSink(new InfluxDBSink<>("mimicData", "ABPMean"));
 
@@ -52,7 +51,7 @@ public class StreamingMedicalJob {
                 // save the average data for every key in a different series
                 .name("mimicDataAvg")
                 .print();
-                //.addSink(new InfluxDBSink<>("mimicData", "ABPMeanAvg"));
+        //.addSink(new InfluxDBSink<>("mimicData", "ABPMeanAvg"));
 
         //mimicData.print();
 

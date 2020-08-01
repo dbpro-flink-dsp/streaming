@@ -18,45 +18,47 @@ public class AudioDataSourceFunction implements SourceFunction<DataPoint<Double>
 
     private String wavFileName;
     private int samplingRate=0;
-    
+
     private volatile long currentTimeMs = -1;
 
     public AudioDataSourceFunction(String wavFileName) {
-        this.wavFileName = wavFileName;        
+        this.wavFileName = wavFileName;
     }
 
     @Override
     public void run(SourceFunction.SourceContext<DataPoint<Double>> sourceContext) throws Exception {
 
-    	
-    	Calendar calendar = new GregorianCalendar();
-    	// Set an arbitrary starting time, or set one fixed one to always generate the same time stamps (for testing)
-   	    // Current time:
+
+        Calendar calendar = new GregorianCalendar();
+        // Set an arbitrary starting time, or set one fixed one to always generate the same time stamps (for testing)
+        // Current time:
         //long startTime = System.currentTimeMillis();
-   	    // Fixed time:
+        // Fixed time:
         calendar.set(2019, 11, 04, 0, 0, 0);  // month is between 0-11: 2017,0,1,0,0,0 corresponds to: 2017 Jan 01 00:00:00.000
-     	long startTime = calendar.getTimeInMillis();
-    	
+        long startTime = calendar.getTimeInMillis();
+        //long startTime = 0;
+        System.out.println("first epoch: "+startTime);
         // Get the Stream of AudioData Elements in the wav File:
         try(DoubleStream stream = getLocalAudioData(wavFileName)) {
 
             // We need to get an iterator, since the SourceFunction has to break out of its main loop on cancellation:
             Iterator<Double> iterator = stream.iterator();
-            double periodMs = (1.0/samplingRate) * 10e6;  // period in miliseconds
-            
-            System.out.println("     ****samplingRate" + samplingRate + "  periodMs: " + periodMs);
-            
-            // Make sure to cancel, when the Source function is canceled by an external event:
-            while (isRunning && iterator.hasNext()) {      	  
+            //double periodMs = (1.0/samplingRate) * 10e3;  // period in miliseconds
+            long periodMs = 625;
 
-            	if(currentTimeMs == -1) {
+            System.out.println("     ****samplingRate" + samplingRate + "  periodMs: " + periodMs);
+
+            // Make sure to cancel, when the Source function is canceled by an external event:
+            while (isRunning && iterator.hasNext()) {
+
+                if(currentTimeMs == -1) {
                     currentTimeMs = startTime;
                     sourceContext.collect(new DataPoint<Double>(currentTimeMs,iterator.next()));
                 } else {
-                	currentTimeMs = (long)(currentTimeMs + periodMs);
-                	sourceContext.collect(new DataPoint<Double>(currentTimeMs,iterator.next()));
+                    currentTimeMs = (long)(currentTimeMs + periodMs);
+                    sourceContext.collect(new DataPoint<Double>(currentTimeMs,iterator.next()));
                 }
-                   
+
             }
         }
     }
@@ -67,29 +69,30 @@ public class AudioDataSourceFunction implements SourceFunction<DataPoint<Double>
     }
 
     /**
-     * Get the data in Doubles from the wav file and return it in a DoubleStream 
+     * Get the data in Doubles from the wav file and return it in a DoubleStream
      * @param wavFile
      * @return
      */
     private DoubleStream getLocalAudioData(String wavFile) {
 
-    	double[] audio = null; 
-    	DoubleStream audioDoubleStream = null;
-    	
-    	try {     		
-    	   AudioInputStream ais = AudioSystem.getAudioInputStream(new File(wavFile));
-    	   this.samplingRate = (int) ais.getFormat().getSampleRate();
-    	   
-    	   AudioDoubleDataSource signal = new AudioDoubleDataSource(ais);
-    	      	   
-     	   audio = signal.getAllData();      	   
-     	   audioDoubleStream = Arrays.stream(audio);     	   
-    	}
-    	catch (final Exception e) {
-    		e.printStackTrace();
-    	}    	
-    	return audioDoubleStream;    	    	
+        double[] audio = null;
+        DoubleStream audioDoubleStream = null;
+
+        try {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File(wavFile));
+            this.samplingRate = (int) ais.getFormat().getSampleRate();
+            this.samplingRate = (int) ais.getFormat().getSampleRate();
+
+            AudioDoubleDataSource signal = new AudioDoubleDataSource(ais);
+
+            audio = signal.getAllData();
+            audioDoubleStream = Arrays.stream(audio);
+        }
+        catch (final Exception e) {
+            e.printStackTrace();
+        }
+        return audioDoubleStream;
     }
 
-    
+
 }

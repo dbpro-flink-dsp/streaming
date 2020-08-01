@@ -27,7 +27,7 @@ public class InfluxDBSink<T extends DataPoint<? extends Number>> extends RichSin
    * @param measurement
    */
   public InfluxDBSink(String dbName, String measurement){
-	this.dataBaseName = dbName;
+    this.dataBaseName = dbName;
     this.measurement = measurement;
   }
 
@@ -47,8 +47,8 @@ public class InfluxDBSink<T extends DataPoint<? extends Number>> extends RichSin
   @Override
   public void invoke(T dataPoint) throws Exception {
     Point.Builder builder = Point.measurement(measurement)
-      .time(dataPoint.getTimeStampMs(), TimeUnit.MILLISECONDS)
-      .addField(fieldName, dataPoint.getValue());
+            .time(dataPoint.getTimeStampMs(), TimeUnit.MILLISECONDS)
+            .addField(fieldName, dataPoint.getValue());
 
     if(dataPoint instanceof KeyedDataPoint){
       builder.tag("key", ((KeyedDataPoint) dataPoint).getKey());

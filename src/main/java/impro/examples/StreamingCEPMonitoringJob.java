@@ -33,7 +33,8 @@ public class StreamingCEPMonitoringJob {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         // GKG Table
-        DataStream<GDELTGkgData> gdeltGkgData = env.readTextFile(params.get("input"))
+        //DataStream<GDELTGkgData> gdeltGkgData = env.readTextFile(params.get("input"))
+        DataStream<GDELTGkgData> gdeltGkgData = env.readTextFile("./src/main/resources/gkg_example_50.csv")
                 .map(new ParseGdeltGkgDataToBin())
                 .assignTimestampsAndWatermarks(new GkgDataAssigner());
 

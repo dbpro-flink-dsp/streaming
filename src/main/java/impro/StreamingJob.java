@@ -59,8 +59,8 @@ public class StreamingJob {
 		@SuppressWarnings({"rawtypes", "serial"})
 
 		//         Tuple3<key, time stamp, measurement>
-		DataStream<Tuple3<String, Double, Long>> waterData = env.readTextFile(params.get("input"))
-				                                                .map(new ParseData());
+				DataStream<Tuple3<String, Double, Long>> waterData = env.readTextFile(params.get("input"))
+				.map(new ParseData());
 		waterData.print();
 
 
@@ -77,7 +77,7 @@ public class StreamingJob {
 				// save the average data for every key in a different series
 				//.name("waterLevelAvg");
 				.writeAsCsv("/tmp/noaa_water_level_averaged.csv", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
-				//.print();
+		//.print();
 
 		env.execute("WaterLevelExample");
 	}

@@ -21,7 +21,7 @@ package impro.connectors.sources;
 
 /**
  * @author Marc Schr&ouml;der
- * 
+ *
  */
 public class BaseDoubleDataSource implements DoubleDataSource {
 	protected DoubleDataSource inputSource = null;
@@ -38,7 +38,7 @@ public class BaseDoubleDataSource implements DoubleDataSource {
 
 	/**
 	 * Request to get the specified amount of data in a new double array.
-	 * 
+	 *
 	 * @param amount
 	 *            the number of doubles requested
 	 * @return a new double array; its length may be smaller than amount if not enough data could be obtained. If no data could be
@@ -62,7 +62,7 @@ public class BaseDoubleDataSource implements DoubleDataSource {
 
 	/**
 	 * Try to get as many double data from this DoubleDataSource as target can hold.
-	 * 
+	 *
 	 * @param target
 	 *            the double array in which to write the data
 	 * @return the number of data items written into target. If the returned value is less than target.length, only that many data
@@ -75,7 +75,7 @@ public class BaseDoubleDataSource implements DoubleDataSource {
 	/**
 	 * Try to get length doubles from this DoubleDataSource, and copy them into target, starting from targetPos. This is the core
 	 * method getting the data. Subclasses may want to override this method.
-	 * 
+	 *
 	 * @param target
 	 *            the double array to write into
 	 * @param targetPos
@@ -99,7 +99,7 @@ public class BaseDoubleDataSource implements DoubleDataSource {
 
 	/**
 	 * Whether or not any more data can be read from this data source.
-	 * 
+	 *
 	 * @return true if another call to getData() will return data, false otherwise.
 	 */
 	public boolean hasMoreData() {
@@ -111,7 +111,7 @@ public class BaseDoubleDataSource implements DoubleDataSource {
 	/**
 	 * The number of doubles that can currently be read from this double data source without blocking. This number can change over
 	 * time.
-	 * 
+	 *
 	 * @return the number of doubles that can currently be read without blocking
 	 */
 	public int available() {
@@ -123,7 +123,7 @@ public class BaseDoubleDataSource implements DoubleDataSource {
 
 	/**
 	 * Get all the data that can be read from this data source, in a single double array.
-	 * 
+	 *
 	 * @throws OutOfMemoryError
 	 *             if a sufficiently large double array cannot be created.
 	 * @return a double array of exactly the length required to contain all the data that can be read from this source. Returns an
@@ -155,7 +155,7 @@ public class BaseDoubleDataSource implements DoubleDataSource {
 	/**
 	 * Get the total length of the data in this data source, if available. For a BufferedDoubleDataSource created from a double[],
 	 * the data length is available.
-	 * 
+	 *
 	 * @return the number of doubles that can be read from this data source, or DoubleDataSource.NOT_SPECIFIED if unknown.
 	 */
 	public long getDataLength() {

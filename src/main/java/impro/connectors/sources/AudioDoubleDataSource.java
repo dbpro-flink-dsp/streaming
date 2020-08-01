@@ -47,7 +47,7 @@ public class AudioDoubleDataSource extends BaseDoubleDataSource {
 
 	/**
 	 * Initialise this double data source with the AudioInputStream from which samples can be read.
-	 * 
+	 *
 	 * @param ais
 	 *            ais
 	 * @param isAutomaticClippingControl
@@ -86,7 +86,7 @@ public class AudioDoubleDataSource extends BaseDoubleDataSource {
 
 	/**
 	 * Get the sampling rate of the audio data.
-	 * 
+	 *
 	 * @return the sampling rate
 	 */
 	public int getSamplingRate() {
@@ -102,7 +102,7 @@ public class AudioDoubleDataSource extends BaseDoubleDataSource {
 	 * method getting the data. Subclasses may want to override this method. If an exception occurs reading from the underlying
 	 * reader, or converting data to double, the method will print a stack trace to standard error, but otherwise will silently
 	 * stop and behave as if all data was read.
-	 * 
+	 *
 	 * @param target
 	 *            the double array to write into
 	 * @param targetPos
@@ -190,7 +190,7 @@ public class AudioDoubleDataSource extends BaseDoubleDataSource {
 
 	/**
 	 * Whether or not any more data can be read from this data source.
-	 * 
+	 *
 	 * @return true if another call to getData() will return data, false otherwise.
 	 */
 	public boolean hasMoreData() {
@@ -200,7 +200,7 @@ public class AudioDoubleDataSource extends BaseDoubleDataSource {
 	/**
 	 * The number of doubles that can currently be read from this double data source without blocking. This number can change over
 	 * time.
-	 * 
+	 *
 	 * @return the number of doubles that can currently be read without blocking
 	 */
 	public int available() {

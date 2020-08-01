@@ -4,7 +4,6 @@ import impro.connectors.sources.AudioDataSourceFunction;
 import impro.data.KeyedDataPoint;
 import impro.util.AssignKeyFunction;
 import org.apache.flink.api.java.tuple.Tuple;
-import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -35,8 +34,9 @@ import org.apache.flink.util.Collector;
 public class StreamingAudioProcesingJob {
     public static void main(String[] args) throws Exception {
 
-        final ParameterTool params = ParameterTool.fromArgs(args);
-        String wavFile = params.get("input");
+        //final ParameterTool params = ParameterTool.fromArgs(args);
+        //String wavFile = params.get("input");
+        String wavFile = "./src/main/resources/short_curious.wav";
         System.out.println("     wav file: " + wavFile);
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -44,23 +44,23 @@ public class StreamingAudioProcesingJob {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         @SuppressWarnings({"rawtypes", "serial"})
         // Read the audio data from a wave file
-        DataStream<KeyedDataPoint<Double>> audioDataStream = env.addSource(new AudioDataSourceFunction(wavFile))
+                DataStream<KeyedDataPoint<Double>> audioDataStream = env.addSource(new AudioDataSourceFunction(wavFile))
                 .map(new AssignKeyFunction("wav"));
 
-        // print and write in a csv file the input data, just for vizualisation, other option could be
+        // print and write in a csv file the input data, just for visualization, other option could be
         // to sink into InfluxDB and plot with grafana
         audioDataStream.print();
         audioDataStream.writeAsText("./src/main/resources/tmp_wav.csv", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
 
         // Apply the Energy function per window
         DataStream<KeyedDataPoint<Double>> audioDataStreamEnergy = audioDataStream
-                        // the timestamps are from the data
-                        .assignTimestampsAndWatermarks(new ExtractTimestamp())
-                        .keyBy("key")
-                        // slide a window
-                        .window(SlidingEventTimeWindows.of(Time.seconds(2), Time.seconds(1)))
-                        // calculate energy per window
-                        .apply(new EnergyCalculationFunction());
+                // the timestamps are from the data
+                .assignTimestampsAndWatermarks(new ExtractTimestamp())
+                .keyBy("key")
+                // slide a window
+                .window(SlidingEventTimeWindows.of(Time.seconds(2), Time.seconds(1)))
+                // calculate energy per window
+                .apply(new EnergyCalculationFunction());
 
 
         //audioDataStreamEnergy.print();

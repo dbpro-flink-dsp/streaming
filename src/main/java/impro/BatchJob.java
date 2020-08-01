@@ -45,7 +45,7 @@ public class BatchJob {
 
 	public static void main(String[] args) throws Exception {
 
-		final ParameterTool params = ParameterTool.fromArgs(args);
+		//final ParameterTool params = ParameterTool.fromArgs(args);
 
 		// set up the batch execution environment
 		final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
@@ -54,8 +54,8 @@ public class BatchJob {
 		 * Read and clean the data
 		 * 1. add path of the data
 		 */
-		String dataPath =  params.get("input");
-
+		//String dataPath =  params.get("input");
+		String dataPath = "./src/main/resources/OnlineRetail-short.csv";
 		/*
 		 * 2. Check how your data is organized:
 		 * InvoiceNo,StockCode,Description,Quantity,InvoiceDate,UnitPrice,CustomerID,Country
@@ -110,7 +110,7 @@ public class BatchJob {
 
 		itemsMoreSold.print();
 
-		//env.execute("OnlineRetail Batch");
+
 
 	} // end main method
 
@@ -148,7 +148,7 @@ public class BatchJob {
 				} else {
 					groupItems += trans.f1 + ", ";
 				}
-                numItems++;
+				numItems++;
 
 			}
 			out.collect(new Tuple3<String,Integer, String>(invoiceNumber, numItems, groupItems));

@@ -57,7 +57,7 @@ public class BatchIterationJob {
 
         // calculate in every iteration new theta values
         DataSet<Tuple2<Double, Double>> newTheta = data
-                              .reduceGroup(new StepFunction()).withBroadcastSet(thetaIterative, "theta");
+                .reduceGroup(new StepFunction()).withBroadcastSet(thetaIterative, "theta");
 
         // Iteratively transform the IterativeDataSet
         DataSet<Tuple2<Double, Double>> finalTheta = thetaIterative.closeWith(newTheta);

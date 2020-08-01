@@ -59,7 +59,7 @@ public class BufferedDoubleDataSource extends BaseDoubleDataSource {
 
 	/**
 	 * Whether or not any more data can be read from this data source.
-	 * 
+	 *
 	 * @return true if another call to getData() will return data, false otherwise.
 	 */
 	public boolean hasMoreData() {
@@ -70,7 +70,7 @@ public class BufferedDoubleDataSource extends BaseDoubleDataSource {
 
 	/**
 	 * Amount of data currently in the buffer. If hasMoreData() returns true, this number may increase.
-	 * 
+	 *
 	 * @return the number of doubles that can currently be read without recourse to an input source.
 	 */
 	public int currentlyInBuffer() {
@@ -81,7 +81,7 @@ public class BufferedDoubleDataSource extends BaseDoubleDataSource {
 	/**
 	 * The number of doubles that can currently be read from this double data source without blocking. This number can change over
 	 * time.
-	 * 
+	 *
 	 * @return the number of doubles that can currently be read without blocking
 	 */
 	public int available() {
@@ -97,7 +97,7 @@ public class BufferedDoubleDataSource extends BaseDoubleDataSource {
 
 	/**
 	 * Try to get length doubles from this DoubleDataSource, and copy them into target, starting from targetPos.
-	 * 
+	 *
 	 * @param target
 	 *            the double array to write into
 	 * @param targetPos
@@ -125,7 +125,7 @@ public class BufferedDoubleDataSource extends BaseDoubleDataSource {
 	/**
 	 * Attempt to get more data from the input source. If less than this can be read, the possible amount will be read, but
 	 * canReadMore() will return false afterwards.
-	 * 
+	 *
 	 * @param minLength
 	 *            the amount of data to get from the input source
 	 * @return true if the requested amount could be read, false if none or less data could be read.
@@ -157,7 +157,7 @@ public class BufferedDoubleDataSource extends BaseDoubleDataSource {
 
 	/**
 	 * Increase the underlying buffer array in size, so that the new size is at least minSize
-	 * 
+	 *
 	 * @param minSize
 	 *            the minimum new size of the array.
 	 */
